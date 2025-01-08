@@ -1,0 +1,26 @@
+#!/bin/bash
+
+wget -q -O /usr/bin/keamanan "https://raw.githubusercontent.com/rifstore/RifkyV4/main/files/keamanan" > /dev/null 2>&1
+
+# SERVICE LIMIT IP VMESS
+cat >/etc/systemd/system/keamanan.service << EOF
+[Unit]
+Description=Set
+ProjectAfter=network.target
+
+[Service]
+WorkingDirectory=/root
+ExecStart=/usr/bin/bash keamanan
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl daemon-reload
+systemctl enable --now keamanan
+
+# echo "Fitur Keamanan Success!"
+# echo "Reboot Otomatis Ram (90%)! Back In 5 Seconds"
+# sleep 5
+# menu
